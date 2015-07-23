@@ -15,6 +15,10 @@ public class Shopping {
     articles.add(new Article("Thon", 1.50, 0, "Conserves", 20, 3));
   }
 
+  public Shopping(List<Article> articles) {
+    this.articles = articles;
+  }
+
   public List<Article> getArticles() {
     return articles;
   }
