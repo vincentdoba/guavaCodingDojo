@@ -12,7 +12,7 @@ public class ClassicAccountancy implements Accountancy {
   public double totalInvoice() {
     double total = 0;
     for (Article article : shopping.getArticles()) {
-      total += article.getPriceWithoutCut() * (1 - article.getCutPercentage());
+      total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100);
     }
     return total;
   }
@@ -21,7 +21,7 @@ public class ClassicAccountancy implements Accountancy {
     double total = 0;
     for (Article article : shopping.getArticles()) {
       if (category.equals(article.getCategory())) {
-        total += article.getPriceWithoutCut() * (1 - article.getCutPercentage());
+        total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100);
       }
     }
     return total;
@@ -32,9 +32,9 @@ public class ClassicAccountancy implements Accountancy {
     for (Article article : shopping.getArticles()) {
       Double total = result.get(article.getCategory());
       if (total == null) {
-        result.put(article.getCategory(), article.getPriceWithoutCut() * (1 - article.getCutPercentage()));
+        result.put(article.getCategory(), article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100));
       } else {
-        result.put(article.getCategory(), total + article.getPriceWithoutCut() * (1 - article.getCutPercentage()));
+        result.put(article.getCategory(), total + article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100));
       }
     }
     return result;
@@ -43,7 +43,7 @@ public class ClassicAccountancy implements Accountancy {
   public double totalVat() {
     double total = 0;
     for (Article article : shopping.getArticles()) {
-      total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()) * article.getVatPercentage();
+      total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100) * (article.getVatPercentage()/100);
     }
     return total;
   }
@@ -52,7 +52,7 @@ public class ClassicAccountancy implements Accountancy {
     double total = 0;
     for (Article article : shopping.getArticles()) {
       if (article.getCutPercentage() > 0) {
-        total += article.getPriceWithoutCut() * article.getCutPercentage();
+        total += article.getPriceWithoutCut() * article.getCutPercentage()/100;
       }
     }
     return total;
