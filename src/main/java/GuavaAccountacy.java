@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Map;
 
 public class GuavaAccountacy implements Accountancy {
@@ -36,6 +37,11 @@ public class GuavaAccountacy implements Accountancy {
 
     @Override
     public String allArticleNames() {
+        return null;
+    }
+
+    @Override
+    public List<String> topIngredientList(int i) {
         return null;
     }
 }

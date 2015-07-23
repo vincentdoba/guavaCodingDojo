@@ -1,6 +1,6 @@
+
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ClassicAccountancy implements Accountancy {
 
@@ -72,6 +72,44 @@ public class ClassicAccountancy implements Accountancy {
 
         }
         return builder.toString();
+    }
+
+    public List<String> topIngredientList(int i) {
+
+        Map<String, Integer> countByIngredient = new HashMap<>();
+        for (Article article : shopping.getArticles()) {
+            for (String ingredient : article.getIngredients()) {
+                Integer count = countByIngredient.get(ingredient);
+                if (count == null) {
+                    countByIngredient.put(ingredient, 1);
+                } else {
+                    countByIngredient.put(ingredient, count + 1);
+                }
+            }
+        }
+
+        Iterator<String> iterator = countByIngredient.keySet().iterator();
+        List<String> topIngredients = new ArrayList<>();
+        while (iterator.hasNext()) {
+            String key = iterator.next();
+            Integer count = countByIngredient.get(key);
+
+            if (topIngredients.size() < i) {
+                topIngredients.add(key);
+            } else {
+                int j = 0;
+                for (String topIngredient : topIngredients) {
+                    if (count > countByIngredient.get(topIngredient)) {
+                        topIngredients.set(j, key);
+                        break;
+                    }
+                    j++;
+                }
+            }
+
+        }
+
+        return topIngredients;
     }
 
     private double getRoundedPrice(double total) {

@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ClassicAccountancyTest {
@@ -76,5 +78,18 @@ public class ClassicAccountancyTest {
 
         // Then
         assertThat(allArticleNames).isEqualTo("Boeuf,\nPorc,\nSauce Tomate,\nPetits Pois,\nThon");
+    }
+
+    @Test
+    public void should_return_the_list_of_the_top_three_ingredients_in_the_shopping_list() {
+        // Given
+        ClassicAccountancy classicAccountancy = new ClassicAccountancy(new Shopping());
+
+        // When
+        List<String> ingredients = classicAccountancy.topIngredientList(3);
+
+        // Then
+        assertThat(ingredients).hasSize(3);
+        assertThat(ingredients).containsOnly("Conservateur","Eau", "Sel");
     }
 }

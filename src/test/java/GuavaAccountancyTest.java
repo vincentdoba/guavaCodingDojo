@@ -1,7 +1,9 @@
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GuavaAccountancyTest {
 
@@ -82,6 +84,20 @@ public class GuavaAccountancyTest {
 
         // Then
         assertThat(allArticleNames).isEqualTo("Boeuf,\nPorc,\nSauce Tomate,\nPetits Pois,\nThon");
+    }
+
+    @Ignore("Not implemented yet")
+    @Test
+    public void should_return_the_list_of_the_top_three_ingredients_in_the_shopping_list() {
+        // Given
+        GuavaAccountacy guavaAccountacy = new GuavaAccountacy(new Shopping());
+
+        // When
+        List<String> ingredients = guavaAccountacy.topIngredientList(3);
+
+        // Then
+        assertThat(ingredients).hasSize(3);
+        assertThat(ingredients).containsOnly("Conservateur","Eau", "Sel");
     }
 
 }
