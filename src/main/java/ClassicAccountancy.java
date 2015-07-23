@@ -15,17 +15,21 @@ public class ClassicAccountancy implements Accountancy {
     for (Article article : shopping.getArticles()) {
       total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100);
     }
-    return (new BigDecimal(total)).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+    return getRoundedPrice(total);
   }
 
-  public double totalFor(String category) {
+    private double getRoundedPrice(double total) {
+        return (new BigDecimal(total)).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
+    }
+
+    public double totalFor(String category) {
     double total = 0;
     for (Article article : shopping.getArticles()) {
       if (category.equals(article.getCategory())) {
         total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100);
       }
     }
-    return total;
+    return getRoundedPrice(total);
   }
 
   public Map<String, Double> priceByCategory() {
@@ -46,7 +50,7 @@ public class ClassicAccountancy implements Accountancy {
     for (Article article : shopping.getArticles()) {
       total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100) * (article.getVatPercentage()/100);
     }
-    return total;
+    return getRoundedPrice(total);
   }
 
   public double totalCut() {
@@ -56,7 +60,7 @@ public class ClassicAccountancy implements Accountancy {
         total += article.getPriceWithoutCut() * article.getCutPercentage()/100;
       }
     }
-    return total;
+    return getRoundedPrice(total);
   }
 
   public String allArticleNames() {
@@ -66,7 +70,7 @@ public class ClassicAccountancy implements Accountancy {
     for (Article article : shopping.getArticles()) {
       builder.append(article.getName());
       if (index != shopping.getArticles().size() - 1) {
-        builder.append(", \n");
+        builder.append(",\n");
       }
       index++;
 
