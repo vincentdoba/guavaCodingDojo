@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class ClassicAccountancy implements Accountancy {
     for (Article article : shopping.getArticles()) {
       total += article.getPriceWithoutCut() * (1 - article.getCutPercentage()/100);
     }
-    return total;
+    return (new BigDecimal(total)).setScale(2, BigDecimal.ROUND_DOWN).doubleValue();
   }
 
   public double totalFor(String category) {
