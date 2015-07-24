@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,6 +33,7 @@ public class ClassicAccountancyTest {
         assertThat(totalPriceForMeat).isEqualTo(19.89);
     }
 
+
     @Test
     public void should_return_total_for_a_category_when_conserves()  {
         // Given
@@ -43,6 +45,21 @@ public class ClassicAccountancyTest {
         // Then
         assertThat(totalPriceForMeat).isEqualTo(6.65);
     }
+
+    @Test
+    public void should_return_price_by_category() {
+        // Given
+        ClassicAccountancy classicAccountancy = new ClassicAccountancy(new Shopping());
+
+        // When
+        Map<String,Double> priceByCategory = classicAccountancy.priceByCategory();
+
+        // Then
+        assertThat(priceByCategory).hasSize(2);
+        assertThat(priceByCategory.keySet()).containsExactly("Viandes", "Conserves");
+        assertThat(priceByCategory.values()).containsExactly(19.89, 6.65);
+    }
+
 
     @Test
     public void should_return_total_vat()  {
@@ -90,6 +107,6 @@ public class ClassicAccountancyTest {
 
         // Then
         assertThat(ingredients).hasSize(3);
-        assertThat(ingredients).containsOnly("Conservateur","Eau", "Sel");
+        assertThat(ingredients).containsOnly("Conservateur", "Eau", "Sel");
     }
 }

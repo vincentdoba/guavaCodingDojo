@@ -2,6 +2,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +46,21 @@ public class GuavaAccountancyTest {
 
         // Then
         assertThat(totalPriceForMeat).isEqualTo(6.65);
+    }
+
+    @Ignore("Not implemented yet")
+    @Test
+    public void should_return_price_by_category() {
+        // Given
+        ClassicAccountancy classicAccountancy = new ClassicAccountancy(new Shopping());
+
+        // When
+        Map<String,Double> priceByCategory = classicAccountancy.priceByCategory();
+
+        // Then
+        assertThat(priceByCategory).hasSize(2);
+        assertThat(priceByCategory.keySet()).containsExactly("Viandes", "Conserves");
+        assertThat(priceByCategory.values()).containsExactly(19.89, 6.65);
     }
 
     @Ignore("Not implemented yet")

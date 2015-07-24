@@ -29,13 +29,15 @@ public class ClassicAccountancy implements Accountancy {
     }
 
     public Map<String, Double> priceByCategory() {
-        Map<String, Double> result = new HashMap<String, Double>();
+        Map<String, Double> result = new HashMap<>();
         for (Article article : shopping.getArticles()) {
             Double total = result.get(article.getCategory());
             if (total == null) {
-                result.put(article.getCategory(), article.getPriceWithoutCut() * (1 - article.getCutPercentage() / 100));
+                double amount = article.getPriceWithoutCut() * (1 - article.getCutPercentage() / 100);
+                result.put(article.getCategory(), getRoundedPrice(amount));
             } else {
-                result.put(article.getCategory(), total + article.getPriceWithoutCut() * (1 - article.getCutPercentage() / 100));
+                double amount = total + article.getPriceWithoutCut() * (1 - article.getCutPercentage() / 100);
+                result.put(article.getCategory(), getRoundedPrice(amount));
             }
         }
         return result;
