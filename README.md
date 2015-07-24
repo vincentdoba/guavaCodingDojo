@@ -1,4 +1,4 @@
-# Guava Coding Dojo
+# Java 8 Coding Dojo
 
 On a une liste de courses, avec pour chaque article :
 * le nom de l'article
