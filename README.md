@@ -6,5 +6,6 @@ On a une liste de courses, avec pour chaque article :
 * la catégorie
 * la réduction
 * la TVA
+* liste des ingrédients
 
 ## Use case
